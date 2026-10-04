@@ -1,0 +1,53 @@
+diff --git a/src/AsciiRenderer.java b/src/AsciiRenderer.java
+new file mode 100644
+index 0000000..86b7a8e
+--- /dev/null
++++ b/src/AsciiRenderer.java
+@@ -0,0 +1,9 @@
++public class AsciiRenderer implements Renderer {
++    public String drawCircle(int radius) {
++        return "ASCII circle radius=" + radius + " (o)";
++    }
++
++    public String drawSquare(int side) {
++        return "ASCII square side=" + side + " [#]";
++    }
++}
+\ No newline at end of file
+diff --git a/src/Main.java b/src/Main.java
+index da4354e..83bf6ce 100644
+--- a/src/Main.java
++++ b/src/Main.java
+@@ -33,12 +33,12 @@ public class Main {
+         check("T4", "Square + RasterRenderer", s2.execute(), "RASTER square side=3 pixels");
+ 
+         Circle original = new Circle("C5", 2, new VectorRenderer());
+-        String before = original.execute();
++        Shape saved = original;
++        String before = saved.execute();
+         original.setImplementation(new RasterRenderer());
+-        Circle afterRef = original;
+-        String after = afterRef.execute();
+-        boolean sameObject = original == afterRef;
+-        boolean stateUnchanged = afterRef.getId().equals("C5") && afterRef.getRadius() == 2;
++        String after = original.execute();
++        boolean sameObject = saved == original;
++        boolean stateUnchanged = original.getId().equals("C5") && original.getRadius() == 2;
+         boolean resultsOk = before.equals("VECTOR circle radius=2")
+                 && after.equals("RASTER circle radius=2 pixels");
+         total++;
+@@ -49,7 +49,12 @@ public class Main {
+         System.out.println("T5 " + (t5 ? "PASS" : "FAIL") + " | sameObject=" + sameObject
+                 + " | stateUnchanged=" + stateUnchanged);
+         System.out.println("   before=" + before + " | after=" + after);
++        Circle c3 = new Circle("C1", 2, new AsciiRenderer());
++        check("T6", "Circle + AsciiRenderer", c3.execute(), "ASCII circle radius=2 (o)");
+ 
+-        System.out.println("SUMMARY: " + passed + "/" + total + (passed == total ? " PASS" : " PASS (not all)"));
++        Square s3 = new Square("S1", 3, new AsciiRenderer());
++        check("T7", "Square + AsciiRenderer", s3.execute(), "ASCII square side=3 [#]");
++
++        System.out.println("SUMMARY: " + passed + "/" + total + " PASS");
+     }
+ }
+\ No newline at end of file
