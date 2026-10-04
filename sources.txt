@@ -5,3 +5,4 @@ src/Shape.java
 src/Circle.java
 src/Square.java
 src/Main.java
+src/AsciiRenderer.java
