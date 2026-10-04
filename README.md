@@ -63,3 +63,4 @@ Last line of the output: `SUMMARY: 7/7 PASS`
 
 `AsciiRenderer` was added in a separate commit after the base commit.
 Only `AsciiRenderer.java` and `Main.java` changed in `src`. The diff is in `extension.diff`.
+<img width="1730" height="1366" alt="Снимок экрана 2026-10-04 223457" src="https://github.com/user-attachments/assets/17ffd800-25c1-48ca-8ea9-87b7c9c180b5" />
